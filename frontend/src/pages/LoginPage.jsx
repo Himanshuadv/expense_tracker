@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-function LoginPage() {
+const LoginPage = () => {
   return (
-    <div>LoginPage</div>
-  )
-}
+    <div className="w-full h-screen flex items-center justify-center bg-green-50">
+      <h1 className="text-3xl font-semibold">HOME PAGE Here !</h1>
+    </div>
+  );
+};
 
-export default LoginPage
+export default LoginPage;

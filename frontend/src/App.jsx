@@ -1,18 +1,19 @@
-import { useState } from 'react'
-import LoginPage from './pages/LoginPage'
-
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Signin } from "./components/Signin";  
+import { Signup } from "./components/Signup";  
+import LoginPage from "./pages/LoginPage";
 
 function App() {
-
-
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">
-      Hello Sushant!
-    </h1>
-    <LoginPage/>
-    </div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<Signin />} />
+        <Route path="/homepage" element={<LoginPage />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
