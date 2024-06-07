@@ -1,20 +1,87 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {toast} from 'react-toastify'
+import axios from 'axios'
 
 export const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const input = "w-full p-3 mb-4 text-gray-700 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none "
 
   const handleSignup = (e) => {
     e.preventDefault();
-    if (name && email && password) {
-      navigate('/logedin');
-    } else {
-      alert("Please enter all fields");
-    }
-  };
+    
+      const data = { name, email, password };
+    //   console.log(data);
+      axios
+        .post("http://localhost:3000/api/v1/users/signup", data,{withCredentials: true, credentials: 'include'})
+        .then((response) => {
+          // alert(response.data.name);
+          console.log(response);
+          toast.success("Verify Your email and then Login!", {
+            theme: "light",
+            autoClose: 5000,
+          });
+          const name = response.data.data.user.name;
+          const id = response.data.data.user._id;
+          console.log(response.data.data.user.name);
+          localStorage.setItem("name", name);
+          localStorage.setItem("id", id);
+          navigate('/homepage')
+          
+        })
+        .catch((error) => {
+          // Handle error
+          const err = error.response.data.message;
+          console.log(err);
+          let cleanedErrorMessage = err.replace(
+            /^User validation failed: /,
+            ""
+          );
+
+          let email = "";
+          let password = "";
+
+          const emailIndex = cleanedErrorMessage.indexOf("email:");
+          const passwordIndex = cleanedErrorMessage.indexOf("password:");
+
+          if (emailIndex !== -1) {
+            const nextIndex = cleanedErrorMessage.indexOf(",", emailIndex);
+            email = cleanedErrorMessage.substring(
+              emailIndex + 7,
+              nextIndex !== -1 ? nextIndex : cleanedErrorMessage.length
+            );
+          }
+
+          if (passwordIndex !== -1) {
+            const nextIndex = cleanedErrorMessage.indexOf(",", passwordIndex);
+            password = cleanedErrorMessage.substring(
+              passwordIndex + 10,
+              nextIndex !== -1 ? nextIndex : cleanedErrorMessage.length
+            );
+          }
+
+          if (email !== "") {
+            toast.error(email, {
+              autoClose: 20000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              theme: "colored",
+            });
+          }
+          if (password !== "") {
+            toast.error(password, {
+              autoClose: 20000,
+              hideProgressBar: true,
+              closeOnClick: true,
+              theme: "colored",
+            });
+          }
+        });
+      }
+    
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-gradient-to-r from-blue-100 to-blue-200">
@@ -41,21 +108,21 @@ export const Signup = () => {
               placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full p-3 mb-4 text-gray-700 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className={input} 
             />
             <input
               type="email"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 mb-4 text-gray-700 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            className={input} 
             />
             <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 mb-4 text-gray-700 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              className={input} 
             />
             <button type="submit" className="w-full font-semibold text-white bg-blue-500 rounded-lg p-3 mb-4 hover:bg-blue-600 transition duration-300">
               Sign Up
