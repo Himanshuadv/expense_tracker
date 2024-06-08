@@ -138,7 +138,7 @@ export const Signup = () => {
           </form>
           <p className="text-sm text-gray-600">
             Already have an account?{" "}
-            <span className="font-semibold text-blue-500 cursor-pointer" onClick={() => navigate('/')}>
+            <span className="font-semibold text-blue-500 cursor-pointer" onClick={() => navigate('/signin')}>
               Log in
             </span>
           </p>
