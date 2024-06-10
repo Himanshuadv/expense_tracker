@@ -28,7 +28,7 @@ export const Signin = () => {
           console.log(response.data.data.user.name);
           localStorage.setItem("name", name);
           localStorage.setItem("id",  id);
-          navigate("/homepage");
+          navigate("/home");
         })
         .catch((error) => {
           // Handle error
