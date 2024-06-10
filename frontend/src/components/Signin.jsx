@@ -16,7 +16,7 @@ export const Signin = () => {
       setPassword("");
       const data = { email, password };
       axios
-        .post(`http://localhost:3000/api/v1/users/login`, data,{withCredentials: true, credentials: 'include'})
+        .post(`http://localhost:3000/api/login`, data,{withCredentials: true, credentials: 'include'})
         .then((response) => {
           // alert(response.data.name);
           // console.log(response.data.data);
