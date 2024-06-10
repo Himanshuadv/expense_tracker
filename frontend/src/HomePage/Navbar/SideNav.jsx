@@ -1,41 +1,36 @@
 import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { LayoutGrid, PiggyBank, ReceiptText, ShieldCheck, LogOut } from "lucide-react";
+import { Link ,NavLink} from 'react-router-dom';
+import { RxDashboard ,LiaPiggyBankSolid, FaMoneyCheck , GiTakeMyMoney ,FaSignOutAlt} from "react-icons";
+// import { LayoutGrid, PiggyBank, ReceiptText, ShieldCheck, LogOut } from "lucide-react";
 
 export const SideNav = () => {
     const menuList = [
         {
             id: 1,
             name: 'Dashboard',
-            icon: LayoutGrid,
+            icon: RxDashboard,
             path: '/home/dashboard'
         },
         {
             id: 2,
             name: 'Budgets',
-            icon: PiggyBank,
+            icon: LiaPiggyBankSolid,
             path: '/home/budget'
         },
         {
             id: 3,
             name: 'Expenses',
-            icon: ReceiptText,
+            icon: FaMoneyCheck,
             path: '/home/expense'
         },
         {
             id: 4,
             name: 'Incomes',
-            icon: ShieldCheck,
+            icon: GiTakeMyMoney,
             path: '/home/incomes'
         }
     ];
 
-    const path = usePathname();
-
-    useEffect(() => {
-        console.log(path);
-    }, [path]);
 
     return (
         <div className='h-screen border shadow-sm'>
@@ -68,7 +63,7 @@ export const SideNav = () => {
 
             {/* -------------Sign out------------- */}
             <div className='fixed bottom-10 p-5 flex gap-2 items-center cursor-pointer'>
-                <LogOut className='text-gray-500' /> Sign out
+                <FaSignOutAlt className='text-gray-500' /> Sign out
             </div>
         </div>
     );
