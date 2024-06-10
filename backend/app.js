@@ -14,7 +14,7 @@ app.use(express.json({ limit: "10kb" }));
 app.use(helmet());
 app.use(cookieParser());
 app.use(cors({ credentials: true, origin: true }));
-app.use("/api/v1/users/", userRouter);
+app.use("/api/", userRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`can't find the ${req.originalUrl}`, 404));
