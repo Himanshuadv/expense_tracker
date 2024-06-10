@@ -1,6 +1,6 @@
 // src/HomePage/Home.jsx
 import React, { Children } from 'react';
-import { SideNav } from './Navbar/SideNav';
+import  SideNav  from './Navbar/SideNav';
 import { Dashboard } from './Dashboard/Dashboard';
 
 export const Home = () => {

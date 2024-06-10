@@ -4,6 +4,7 @@ import { Signin } from "./components/Signin";
 import { Signup } from "./components/Signup"; 
 import { Home } from "./HomePage/Home" ;
 import { LandingPage } from "./pages/LandingPage";
+import PageNotFound from "./HomePage/ui/PageNotFound";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/home" element={<Home />} />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<PageNotFound/>} />
       </Routes>
     </Router>
   );
