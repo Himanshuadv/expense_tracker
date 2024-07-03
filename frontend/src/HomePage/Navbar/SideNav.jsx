@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
-import { Link ,NavLink} from 'react-router-dom';
-import { RxDashboard ,LiaPiggyBankSolid, FaMoneyCheck , GiTakeMyMoney ,FaSignOutAlt} from "react-icons";
-// import { LayoutGrid, PiggyBank, ReceiptText, ShieldCheck, LogOut } from "lucide-react";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { RxDashboard } from 'react-icons/rx';
+import { LiaPiggyBankSolid } from 'react-icons/lia';
+import { FaMoneyCheck, FaSignOutAlt } from 'react-icons/fa';
+import { GiTakeMyMoney } from 'react-icons/gi';
 
 export const SideNav = () => {
     const menuList = [
@@ -31,7 +33,6 @@ export const SideNav = () => {
         }
     ];
 
-
     return (
         <div className='h-screen border shadow-sm'>
             {/* ------------LOGO---------- */}
@@ -48,16 +49,18 @@ export const SideNav = () => {
             {/* -----------sidebar headings--------- */}
             <div>
                 {menuList.map((menu) => (
-                    <Link key={menu.id} href={menu.path}>
-                        <h2 className={`flex gap-2 items-center
-                        text-gray-500 font-medium mb-2
-                        p-5 cursor-pointer rounded-md
-                        hover:text-primary hover:bg-blue-100
-                        ${path === menu.path && 'text-primary bg-blue-100'}`}>
-                            <menu.icon />
-                            {menu.name}
-                        </h2>
-                    </Link>
+                    <NavLink
+                        key={menu.id}
+                        to={menu.path}
+                        className={({ isActive }) =>
+                            `flex gap-2 items-center text-gray-500 font-medium mb-2 p-5 cursor-pointer rounded-md hover:text-primary hover:bg-blue-100 ${
+                                isActive ? 'text-primary bg-blue-100' : ''
+                            }`
+                        }
+                    >
+                        <menu.icon />
+                        {menu.name}
+                    </NavLink>
                 ))}
             </div>
 

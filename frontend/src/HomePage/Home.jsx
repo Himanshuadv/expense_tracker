@@ -1,16 +1,15 @@
-// src/HomePage/Home.jsx
 import React, { Children } from 'react';
-import  SideNav  from './Navbar/SideNav';
+import { SideNav } from './Navbar/SideNav';
 import { Dashboard } from './Dashboard/Dashboard';
 
-export const Home = () => {
+export const Home = ({ children }) => {
   return (
-    <div>
-      <div className='fixed md:w-64 hidden md:block '>
-          <SideNav/>
+    <div className="flex">
+      <div className="fixed md:w-64 hidden md:block">
+        <SideNav />
       </div>
-      <div className='md:ml-64'>
-            <Dashboard/>
+      <div className="ml-64 flex-1">
+        <Dashboard>{children}</Dashboard>
       </div>
     </div>
   );
